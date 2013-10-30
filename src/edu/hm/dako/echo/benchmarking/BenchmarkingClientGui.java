@@ -34,6 +34,7 @@ public class BenchmarkingClientGui extends JPanel
     public static final String SINGLE_THREADED_TCP = "SingleThreaded-TCP";
     public static final String MULTI_THREADED_TCP = "MultiThreaded-TCP";
     public static final String SINGLE_THREADED_JMS = "SingleThreaded-JMS";
+    public static final String MULTI_THREADED_JMS = "MultiThreaded-JMS";
     
     private long timeCounter = 0; // Zeitzaehler fuer Testlaufzeit
 
@@ -88,6 +89,7 @@ public class BenchmarkingClientGui extends JPanel
          */
         String[] optionStrings = {
         		SINGLE_THREADED_JMS,
+        		MULTI_THREADED_JMS,
         		SINGLE_THREADED_TCP,
                 MULTI_THREADED_TCP};
         optionList1 = new JComboBox(optionStrings);
@@ -336,7 +338,8 @@ public class BenchmarkingClientGui extends JPanel
             iParm.setImplementationType(ImplementationType.TCPMultiThreaded);
         if (item1.equals(SINGLE_THREADED_JMS))
             iParm.setImplementationType(ImplementationType.JMSSingleThreaded);
-        
+        if (item1.equals(MULTI_THREADED_JMS))
+            iParm.setImplementationType(ImplementationType.JMSMultiThreaded);
         // Eingegebenen Messungstyp auslesen
 
         String item2 = (String) optionList2.getSelectedItem();

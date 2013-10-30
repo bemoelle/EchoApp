@@ -35,7 +35,11 @@ public final class ClientFactory {
                             param.getRemoteServerAddress(), numberOfClient, param.getMessageLength(),
                             param.getNumberOfMessages(), param.getClientThinkTime(),
                             sharedData, getDecoratedFactory(new JmsConnectionFactory()));
-                	
+                case JMSMultiThreaded:
+                    return new ConnectionReusingClient(param.getRemoteServerPort(),
+                            param.getRemoteServerAddress(), numberOfClient, param.getMessageLength(),
+                            param.getNumberOfMessages(), param.getClientThinkTime(),
+                            sharedData, getDecoratedFactory(new JmsConnectionFactory()));
                 default:
                     throw new RuntimeException("Unknown type: " + param.getImplementationType());
             }
