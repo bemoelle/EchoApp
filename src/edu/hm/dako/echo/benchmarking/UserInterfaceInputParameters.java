@@ -62,6 +62,12 @@ public class UserInterfaceInputParameters {
             case TCPMultiThreaded:
                 returnString = "Multi-threaded TCP";
                 break;
+            case JMSSingleThreaded:
+            	returnString = "Single-threaded JMS";
+                break;
+            case JMSMultiThreaded:
+            	returnString = "Multi-threaded JMS";
+                break;
             default:
                 break;
         }
