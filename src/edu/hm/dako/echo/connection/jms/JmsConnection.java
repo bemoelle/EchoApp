@@ -49,7 +49,6 @@ public class JmsConnection implements edu.hm.dako.echo.connection.Connection {
 		sender = queueSession.createSender(senderQueue);
 		sender.setDeliveryMode(DeliveryMode.PERSISTENT);
 		
-		
 		if(isSelectorSelected) {
 			
 			int id = (int)Thread.currentThread().getId();
@@ -61,6 +60,8 @@ public class JmsConnection implements edu.hm.dako.echo.connection.Connection {
 			receiver = queueSession.createReceiver(tempqueue);
 		}
 		
+		tempqueue =  queueSession.createTemporaryQueue();
+		receiver = queueSession.createReceiver(tempqueue);
 		queueConnection.start();
 	}
 
@@ -75,7 +76,6 @@ public class JmsConnection implements edu.hm.dako.echo.connection.Connection {
 	@Override
 	public void send(Serializable message) throws Exception {
 		
-		
 		int id = (int)Thread.currentThread().getId();
 		Message jmsMessage = queueSession.createObjectMessage(message);
 		jmsMessage.setObjectProperty("selector", id);
@@ -86,6 +86,7 @@ public class JmsConnection implements edu.hm.dako.echo.connection.Connection {
 		else {
 			jmsMessage.setJMSReplyTo(tempqueue);
 		}
+
 		sender.send(jmsMessage);
 	}
 
