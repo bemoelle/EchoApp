@@ -28,7 +28,7 @@ public class JmsConnection implements edu.hm.dako.echo.connection.Connection {
 	private QueueSender sender;
 	private QueueReceiver receiver;
 	private TemporaryQueue tempqueue;
-	private boolean isSelectorSelected = true;
+	private boolean isSelectorSelected = false;
 	private Queue receiverQueue;
 	
 	
