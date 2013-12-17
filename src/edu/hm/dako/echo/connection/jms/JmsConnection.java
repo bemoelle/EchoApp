@@ -36,7 +36,7 @@ public class JmsConnection implements edu.hm.dako.echo.connection.Connection {
 		
 		Hashtable<String, String> env = new Hashtable<String, String>();
 		env.put(Context.INITIAL_CONTEXT_FACTORY,"com.tibco.tibjms.naming.TibjmsInitialContextFactory");
-		env.put(Context.PROVIDER_URL, "tcp://10.28.55.147:7222");
+		env.put(Context.PROVIDER_URL, "tcp://"+remoteServerAddress+":"+serverPort);
 		
 		Context initialContext = new InitialContext(env);
 	
@@ -60,8 +60,6 @@ public class JmsConnection implements edu.hm.dako.echo.connection.Connection {
 			receiver = queueSession.createReceiver(tempqueue);
 		}
 		
-		tempqueue =  queueSession.createTemporaryQueue();
-		receiver = queueSession.createReceiver(tempqueue);
 		queueConnection.start();
 	}
 
@@ -69,7 +67,6 @@ public class JmsConnection implements edu.hm.dako.echo.connection.Connection {
 	public Serializable receive() throws Exception {
 		
 		ObjectMessage msg = (ObjectMessage) receiver.receive();
-
 		return (EchoPDU)msg.getObject();
 	}
 
